@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDLC Case Studies Challenge - Apply What You've Learned!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer-box h3 {
+            color: #d63031;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2d3436;
+        }
+
+        .case-study {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-left: 8px solid #667eea;
+        }
+
+        .case-study.difficult {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.moderate {
+            border-left-color: #f39c12;
+        }
+
+        .case-study.starter {
+            border-left-color: #27ae60;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .case-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .difficulty-badge {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-left: 15px;
+        }
+
+        .difficulty-badge.easy {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            color: #155724;
+        }
+
+        .difficulty-badge.moderate {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            color: #856404;
+        }
+
+        .difficulty-badge.hard {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #721c24;
+        }
+
+        .time-badge {
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #434190;
+            margin-left: 10px;
+        }
+
+        .scenario-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .scenario-box h3 {
+            color: #5a67d8;
+            margin-bottom: 15px;
+        }
+
+        .scenario-box p {
+            line-height: 1.8;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .stakeholder-info {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .stakeholder-info h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+
+        .constraints-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #e67e22;
+        }
+
+        .constraints-box h4 {
+            color: #d63031;
+            margin-bottom: 10px;
+        }
+
+        .constraints-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .constraints-box li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .discussion-questions {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .discussion-questions h3 {
+            color: #434190;
+            margin-bottom: 15px;
+        }
+
+        .question-item {
+            background: white;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-item strong {
+            color: #5a67d8;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .think-pair-share {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .think-pair-share h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .activity-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+        }
+
+        .activity-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .decision-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .matrix-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .matrix-card:hover {
+            transform: translateY(-3px);
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .matrix-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8edff 100%);
+        }
+
+        .matrix-card.in-must-have {
+            border-color: #38a169;
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+
+        .matrix-card.in-later {
+            border-color: #e67e22;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        }
+
+        .matrix-card h5 {
+            color: #5a67d8;
+            margin-bottom: 8px;
+        }
+
+        .drop-zone {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .drop-zone p {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .drop-zone .matrix-card {
+            margin: 0;
+        }
+
+        .bonus-challenge {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #ff6b6b;
+        }
+
+        .bonus-challenge h4 {
+            color: #c53030;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .pro-tip {
+            background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #34495e;
+        }
+
+        .pro-tip strong {
+            color: #2c3e50;
+        }
+
+        .reflection-box {
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .reflection-box h4 {
+            color: #6b46c1;
+            margin-bottom: 15px;
+        }
+
+        .reflection-box textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #d6bcfa;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        .answer-reveal {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: none;
+            border-left: 4px solid #38a169;
+        }
+
+        .answer-reveal.shown {
+            display: block;
+        }
+
+        .reveal-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .reveal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .group-activity {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .group-activity h4 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .role-card {
+            background: white;
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .role-card h5 {
+            color: #d63031;
+            margin-bottom: 8px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .notes-section {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #f39c12;
+        }
+
+        .notes-section h4 {
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .notes-section textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #f39c12;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        @media (max-width: 768px) {
+            .case-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .difficulty-badge, .time-badge {
+                margin: 5px 0;
+            }
+
+            .decision-matrix {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 SDLC Case Studies Challenge</h1>
+            <p>Apply your knowledge of Software Development Life Cycle models, requirements engineering, and feasibility analysis to solve real-world scenarios!</p>
+            <p style="margin-top: 15px; font-size: 1em; color: #667eea;"><strong>Estimated Time: 2 Hours</strong> | Work individually, in pairs, or in groups as directed by your instructor</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%;">0% Complete</div>
+        </div>
+
+        <!-- CASE STUDY 1: Banking System Modernization -->
+        <div class="case-study starter">
+            <div class="case-header">
+                <h2 class="case-title">Case Study 1: Banking System Modernization</h2>
+                <span class="difficulty-badge easy">Starter Level</span>
+                <span class="time-badge">⏱️ 20 minutes</span>
+            </div>
+
+            <div class="scenario-box">
+                <h3>📋 The Scenario</h3>
+                <p><strong>Client:</strong> Pacific Trust Bank, a regional bank with 50 branches and 200,000 customers</p>
+                <p><strong>Project:</strong> Replace their 15-year-old legacy core banking system with a modern solution</p>
+                <p><strong>Current Situation:</strong> The existing system is stable but outdated. It handles basic transactions well but cannot support mobile banking, real-time processing, or integration with modern payment systems like Apple Pay or cryptocurrency wallets.</p>
+            </div>
+
+            <div class="stakeholder-info">
+                <h4>👥 Key Stakeholders</h4>
+                <ul>
+                    <li><strong>CTO (Chief Technology Officer):</strong> Wants cutting-edge technology and cloud infrastructure</li>
+                    <li><strong>Operations Manager:</strong> Concerned about disrupting daily operations and employee training</li>
+                    <li><strong>Compliance Officer:</strong> Must ensure system meets banking regulations (very strict requirements)</li>
+                    <li><strong>Customer Service Manager:</strong> Needs system to be intuitive for both employees and customers</li>
+                </ul>
+            </div>
+
+            <div class="constraints-box">
+                <h4>⚠️ Constraints & Requirements</h4>
+                <ul>
+                    <li>Budget: $5 million</li>
+                    <li>Timeline: 18 months (hard deadline for regulatory compliance)</li>
+                    <li>Zero downtime allowed during migration</li>
+                    <li>Must comply with banking regulations (PCI-DSS, SOX, GDPR)</li>
+                    <li>Integration with 15+ existing third-party systems</li>
+                    <li>All requirements are well-documented from regulatory bodies</li>
+                </ul>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>🤔 Discussion Questions</h3>
+                
+                <div class="question-item">
+                    <strong>Question 1: Which SDLC model would you recommend and why?</strong>
+                    Consider: The strict regulatory requirements, well-defined scope, integration complexity, and zero-tolerance for errors in banking systems.
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 2: What are the biggest risks in this project?</strong>
+                    Think about: Data migration, system integration, regulatory compliance, user adoption, and business continuity.
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 3: How would you handle requirements gathering?</strong>
+                    Consider: Multiple stakeholder groups with different priorities, existing documentation, and regulatory requirements.
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 4: What feasibility concerns would you investigate?</strong>
+                    Analyze: Technical feasibility (can we integrate with legacy systems?), Economic feasibility (is $5M enough?), and Operational feasibility (can we train 500+ employees in time?).
+                </div>
+            </div>
+
+            <div class="think-pair-share">
+                <h4>💭 Think-Pair-Share Activity (5 minutes)</h4>
+                <p><strong>Individual (1 min):</strong> Write down your choice of SDLC model and one key reason</p>
+                <p><strong>Pair Discussion (2 min):</strong> Share with a partner and discuss differences in your approaches</p>
+                <p><strong>Class Share (2 min):</strong> Pairs share their conclusions with the class</p>
+            </div>
+
+            <div class="activity-box">
+                <h4>✏️ Activity: Create a Risk Mitigation Plan</h4>
+                <p>Identify the top 3 risks for this project and propose a mitigation strategy for each:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact (High/Med/Low)</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="notes-section">
+                <h4>📝 Your Notes & Decisions</h4>
+                <textarea placeholder="Record your team's decisions, reasoning, and key discussion points here..."></textarea>
+            </div>
+
+            <button class="reveal-btn" onclick="toggleReveal('answer1')">💡 Show Instructor Discussion Points</button>
+            <div class="answer-reveal" id="answer1">
+                <h4>🎯 Discussion Points for Instructors</h4>
+                <p><strong>SDLC Model:</strong> Waterfall or V-Model is most appropriate here because:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Requirements are well-defined and stable (regulatory compliance doesn't change mid-project)</li>
+                    <li>Banking systems require extensive testing and validation at each phase</li>
+                    <li>Documentation is critical for audits and compliance</li>
+                    <li>Changes mid-development would be extremely costly and risky</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Why NOT Agile?</strong> While Agile offers flexibility, banking regulations require complete specifications upfront, and iterative deployment would violate regulatory requirements.</p>
+                <p style="margin-top: 15px;"><strong>Key Requirements Techniques:</strong> Review internal documentation, interviews with compliance officers, questionnaires for large employee base, and prototyping for the user interface (but only after core requirements are locked).</p>
+            </div>
+        </div>
+
+        <!-- CASE STUDY 2: Startup Social Media App -->
+        <div class="case-study moderate">
+            <div class="case-header">
+                <h2 class="case-title">Case Study 2: NextGen Social - A New Social Media Platform</h2>
+                <span class="difficulty-badge moderate">Moderate Level</span>
+                <span class="time-badge">⏱️ 25 minutes</span>
+            </div>
+
+            <div class="scenario-box">
+                <h3>📋 The Scenario</h3>
+                <p><strong>Client:</strong> NextGen Social, a startup with $2M in seed funding</p>
+                <p><strong>Project:</strong> Build a social media platform that combines elements of Instagram, TikTok, and Discord, targeting Gen Z users (ages 13-24)</p>
+                <p><strong>Current Situation:</strong> The founders have a vision but aren't entirely sure what features will resonate with users. They want to launch fast to beat competitors and iterate based on user feedback. They've allocated 6 months to MVP (Minimum Viable Product).</p>
+            </div>
+
+            <div class="stakeholder-info">
+                <h4>👥 Key Stakeholders</h4>
+                <ul>
+                    <li><strong>CEO/Founder:</strong> "We need to fail fast and learn fast. What teens want today might change tomorrow."</li>
+                    <li><strong>Lead Developer:</strong> "We should use proven technology stacks and avoid reinventing the wheel."</li>
+                    <li><strong>UX Designer:</strong> "User experience is everything. If Gen Z doesn't love it immediately, they'll delete it."</li>
+                    <li><strong>Investors:</strong> "Show us user growth and engagement metrics within 6 months, or funding stops."</li>
+                </ul>
+            </div>
+
+            <div class="constraints-box">
+                <h4>⚠️ Constraints & Challenges</h4>
+                <ul>
+                    <li>Limited budget: $2M must cover development, servers, and initial marketing</li>
+                    <li>Small team: 4 developers, 1 designer, 1 product manager</li>
+                    <li>Uncertain requirements: Target users haven't clearly articulated what they want</li>
+                    <li>Fast-moving market: Competitor apps launch new features weekly</li>
+                    <li>Need to reach 100,000 users within 6 months to secure Series A funding</li>
+                </ul>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>🤔 Discussion Questions</h3>
+                
+                <div class="question-item">
+                    <strong>Question 1: Which SDLC model would you choose for this project?</strong>
+                    Consider: Uncertain requirements, need for speed, user feedback importance, and market volatility. Would Waterfall work here? What about Agile or Prototyping model?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 2: How would you handle requirements elicitation when your target users are teenagers who may not know what they want?</strong>
+                    Think about: Traditional techniques vs. creative approaches. Would interviews work? Questionnaires? What about observational studies of how teens use current social media?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 3: The CEO wants to "move fast and break things." How do you balance speed with quality?</strong>
+                    Consider: MVP approach, technical debt, scalability concerns, and user trust. What gets built in Phase 1 vs. Phase 2?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 4: Should you reuse existing components or build everything custom?</strong>
+                    Analyze: Authentication systems, video processing, messaging infrastructure, content recommendation algorithms. When does "buy vs. build" make sense?
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h4>🎯 Activity: Build Your MVP Feature List</h4>
+                <p>You have 6 months and limited resources. Click features to categorize them as "Must Have for MVP" or "Later Versions":</p>
+                
+                <div style="margin: 20px 0;">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">Available Features (Click to Select):</h4>
+                    <div class="decision-matrix" id="available-features">
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="user-profiles">
+                            <h5>User Profiles</h5>
+                            <p>Bio, photos, followers</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="photo-sharing">
+                            <h5>Photo Sharing</h5>
+                            <p>Upload and share images</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="video-sharing">
+                            <h5>Video Sharing</h5>
+                            <p>Upload and share short videos</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="direct-messaging">
+                            <h5>Direct Messaging</h5>
+                            <p>Private chat between users</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="group-chats">
+                            <h5>Group Chats</h5>
+                            <p>Multi-user conversations</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="live-streaming">
+                            <h5>Live Streaming</h5>
+                            <p>Real-time video broadcasts</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="ai-recommendations">
+                            <h5>AI Content Recommendations</h5>
+                            <p>Personalized feed algorithm</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="advanced-filters">
+                            <h5>Advanced Filters</h5>
+                            <p>AR effects, beauty filters</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="ecommerce">
+                            <h5>E-commerce Integration</h5>
+                            <p>In-app shopping features</p>
+                        </div>
+                        <div class="matrix-card" onclick="moveFeature(this, 'must-have')" data-feature="analytics">
+                            <h5>Analytics Dashboard</h5>
+                            <p>User metrics and insights</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%); padding: 20px; border-radius: 10px; min-height: 200px;">
+                        <h4 style="color: #155724; margin-bottom: 15px;">✅ Must Have for MVP</h4>
+                        <div id="must-have" class="drop-zone" style="min-height: 150px;">
+                            <p style="color: #666; font-style: italic;">Click features above to add them here</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); padding: 20px; border-radius: 10px; min-height: 200px;">
+                        <h4 style="color: #856404; margin-bottom: 15px;">⏰ Later Versions</h4>
+                        <div id="later-versions" class="drop-zone" style="min-height: 150px;">
+                            <p style="color: #666; font-style: italic;">Click features above to add them here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <strong style="color: #5a67d8;">Instructions:</strong> Click a feature once to move it to "Must Have for MVP". Click it again to move it to "Later Versions". Click a third time to return it to available features.
+                </div>
+            </div>
+
+            <div class="group-activity">
+                <h4>👥 Group Role-Play Activity (10 minutes)</h4>
+                <p>Divide into teams of 4. Each person takes a role and advocates for their priorities:</p>
+                
+                <div class="role-card">
+                    <h5>Role 1: CEO (Business Focus)</h5>
+                    <p>Push for features that will wow investors and drive user growth metrics. You want something unique that will go viral.</p>
+                </div>
+                
+                <div class="role-card">
+                    <h5>Role 2: Lead Developer (Technical Focus)</h5>
+                    <p>Advocate for technical feasibility and sustainability. You're worried about technical debt and system scalability if you cut corners.</p>
+                </div>
+                
+                <div class="role-card">
+                    <h5>Role 3: UX Designer (User Focus)</h5>
+                    <p>Push for intuitive design and must-have features that teens expect. You believe if UX isn't perfect, users will leave immediately.</p>
+                </div>
+                
+                <div class="role-card">
+                    <h5>Role 4: Product Manager (Balance & Strategy)</h5>
+                    <p>You must mediate between all parties and make final decisions on MVP scope. Consider time, budget, and strategic goals.</p>
+                </div>
+                
+                <p style="margin-top: 15px; color: white;"><strong>Task:</strong> Your team has 10 minutes to agree on exactly 5 features for the MVP and justify your choices based on SDLC principles learned.</p>
+            </div>
+
+            <div class="notes-section">
+                <h4>📝 Your MVP Decision & Justification</h4>
+                <textarea placeholder="List your 5 MVP features and explain why you chose them over others..."></textarea>
+            </div>
+
+            <button class="reveal-btn" onclick="toggleReveal('answer2')">💡 Show Instructor Discussion Points</button>
+            <div class="answer-reveal" id="answer2">
+                <h4>🎯 Discussion Points for Instructors</h4>
+                <p><strong>SDLC Model:</strong> Agile (Scrum or Kanban) is ideal here because:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Requirements are unclear and will evolve based on user feedback</li>
+                    <li>Speed to market is critical in the competitive social media space</li>
+                    <li>2-week sprints allow rapid iteration and course correction</li>
+                    <li>Early user testing helps validate or pivot features quickly</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Prototyping Model</strong> could also work for initial requirements gathering - build quick UI mockups to test with Gen Z focus groups before committing to development.</p>
+                <p style="margin-top: 15px;"><strong>Requirements Elicitation:</strong> Prototyping + observations are key! Traditional interviews may not work well with teens. Consider: creating mockups/wireframes, observing how they use existing apps, beta testing with small user groups, and A/B testing different features.</p>
+                <p style="margin-top: 15px;"><strong>Component Reuse:</strong> Strongly recommended! Use existing libraries for: authentication (Auth0, Firebase), video processing (AWS MediaConvert), messaging (Twilio, Stream), and content delivery (CloudFront). This saves months of development time.</p>
+                <p style="margin-top: 15px;"><strong>Typical MVP:</strong> User profiles, photo/video sharing, direct messaging, and basic feed. Save AI recommendations, live streaming, and advanced filters for later iterations based on what users actually want.</p>
+            </div>
+        </div>
+
+        <!-- CASE STUDY 3: Healthcare Emergency System -->
+        <div class="case-study difficult">
+            <div class="case-header">
+                <h2 class="case-title">Case Study 3: MedAlert - Emergency Medical Dispatch System</h2>
+                <span class="difficulty-badge hard">Advanced Level</span>
+                <span class="time-badge">⏱️ 30 minutes</span>
+            </div>
+
+            <div class="scenario-box">
+                <h3>📋 The Scenario</h3>
+                <p><strong>Client:</strong> City of Riverside Emergency Services Department</p>
+                <p><strong>Project:</strong> Develop a mission-critical dispatch system that coordinates ambulances, fire trucks, and police during emergencies. The system must integrate with 911 call centers, hospital systems, GPS tracking, and traffic data.</p>
+                <p><strong>Current Situation:</strong> Using a 20-year-old system that frequently crashes. Response times have increased by 30% in the past year. Lives are at stake. The city council has approved a $10M emergency budget after a recent incident where system failure contributed to a preventable death.</p>
+            </div>
+
+            <div class="stakeholder-info">
+                <h4>👥 Key Stakeholders (With Conflicting Priorities!)</h4>
+                <ul>
+                    <li><strong>Fire Chief:</strong> "We need real-time GPS tracking of all units and integration with building blueprints for fire responses."</li>
+                    <li><strong>Police Chief:</strong> "Security is paramount. We can't risk criminals accessing our unit locations. Also need integration with criminal databases."</li>
+                    <li><strong>Hospital Network Director:</strong> "We need advance notice of incoming patients with their vitals and condition. Every second counts in trauma."</li>
+                    <li><strong>911 Call Center Manager:</strong> "Our operators need a system that's intuitive under extreme stress. Current system requires 40 hours of training and still confuses people."</li>
+                    <li><strong>City Council:</strong> "This better work perfectly. We can't afford another failure. Also, we need to see results within 12 months for the election cycle."</li>
+                    <li><strong>IT Security Officer:</strong> "This is a critical infrastructure system. We need bulletproof cybersecurity, redundancy, and disaster recovery."</li>
+                </ul>
+            </div>
+
+            <div class="constraints-box">
+                <h4>⚠️ Extreme Constraints & Risks</h4>
+                <ul>
+                    <li><strong>Zero tolerance for failure:</strong> System downtime literally costs lives</li>
+                    <li><strong>Political pressure:</strong> 12-month timeline is aggressive for this complexity</li>
+                    <li><strong>Integration nightmare:</strong> Must integrate with 30+ legacy systems, many with poor documentation</li>
+                    <li><strong>High stakes:</strong> Legal liability if system failure leads to death or injury</li>
+                    <li><strong>24/7 operations:</strong> Cannot take system offline for updates or maintenance</li>
+                    <li><strong>Regulatory compliance:</strong> HIPAA (healthcare data), CJIS (criminal justice), and FCC (emergency communications)</li>
+                    <li><strong>User stress:</strong> System must work flawlessly under high-stress emergency conditions</li>
+                </ul>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>🤔 Complex Discussion Questions</h3>
+                
+                <div class="question-item">
+                    <strong>Question 1: This project has characteristics that could support MULTIPLE SDLC models. What's the best approach?</strong>
+                    Consider: Could you use Waterfall for the critical core dispatch logic (where reliability is paramount) but Agile for the user interface? Is a hybrid approach feasible? What about the Spiral model given the extreme risks?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 2: How do you handle conflicting stakeholder requirements?</strong>
+                    Example conflict: Police want maximum security (may slow system down), while Fire Chief wants speed above all else (may sacrifice some security). Who wins? How do you negotiate?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 3: The timeline is aggressive. How do you determine what's feasible?</strong>
+                    Conduct a feasibility analysis considering: Technical feasibility (can we integrate 30+ systems in 12 months?), Economic feasibility (is $10M enough?), Operational feasibility (can we train 200+ dispatchers?), and Schedule feasibility (12 months realistic?).
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 4: How would you approach requirements elicitation for users who work in high-stress environments?</strong>
+                    911 operators and dispatchers work under extreme pressure. Traditional interviews might not capture the real requirements. What techniques would work better?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 5: This is a mission-critical system. What safeguards must be in place?</strong>
+                    Think about: Redundancy, failover systems, testing strategies, deployment approach, training plans, and rollback procedures if something goes wrong.
+                </div>
+            </div>
+
+            <div class="bonus-challenge">
+                <h4>🔥 Bonus Challenge: The Spiral Model Application</h4>
+                <p>This project is a PERFECT candidate for the Spiral Model due to its high risk. Design a 4-iteration spiral approach:</p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Spiral 1 (Months 1-3):</strong> What would you build and validate?</li>
+                    <li><strong>Spiral 2 (Months 4-6):</strong> What gets added? What risks are addressed?</li>
+                    <li><strong>Spiral 3 (Months 7-9):</strong> How do you expand functionality?</li>
+                    <li><strong>Spiral 4 (Months 10-12):</strong> Final integration and deployment</li>
+                </ol>
+                <p style="margin-top: 15px;"><strong>For each spiral, identify:</strong> Main objectives, risks to address, prototype/deliverable, and validation method.</p>
+            </div>
+
+            <div class="activity-box">
+                <h4>⚖️ Activity: Stakeholder Priority Matrix</h4>
+                <p>When requirements conflict, you must prioritize. Rate each requirement category:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Requirement Category</th>
+                            <th>Priority (1-5)</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>System Reliability</strong> (uptime, no crashes)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Response Speed</strong> (every second counts)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security</strong> (protect sensitive data)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>User Friendliness</strong> (easy under stress)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integration</strong> (works with all systems)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 15px; font-style: italic;">Discussion: In an emergency system, can ANYTHING be deprioritized? How do you achieve all of these simultaneously?</p>
+            </div>
+
+            <div class="pro-tip">
+                <strong>💡 Pro Tip:</strong> In mission-critical systems, the V-Model is often preferred because it emphasizes testing at every stage. Each development phase has a corresponding testing phase, ensuring quality and reliability. Combined with Spiral's risk management, you get a powerful hybrid approach.
+            </div>
+
+            <div class="reflection-box">
+                <h4>🤔 Critical Thinking Reflection</h4>
+                <p>This project highlights that there's rarely a "perfect" SDLC model for complex projects. Write your reflection:</p>
+                <textarea placeholder="Reflect on: What makes this project so challenging? Why might a hybrid approach be necessary? What would you do if the city council insisted on Agile to 'be more flexible' despite the risks? How do you communicate technical constraints to non-technical stakeholders?"></textarea>
+            </div>
+
+            <div class="notes-section">
+                <h4>📝 Your Analysis & Recommendations</h4>
+                <textarea placeholder="Document your SDLC model recommendation, spiral iteration plan, risk mitigation strategies, and how you'd handle stakeholder conflicts..."></textarea>
+            </div>
+
+            <button class="reveal-btn" onclick="toggleReveal('answer3')">💡 Show Instructor Discussion Points</button>
+            <div class="answer-reveal" id="answer3">
+                <h4>🎯 Discussion Points for Instructors</h4>
+                <p><strong>Best Approach: Spiral Model (or Hybrid Spiral-V Model)</strong></p>
+                <p><strong>Rationale:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>High Risk:</strong> Lives are at stake, making systematic risk analysis essential in each iteration</li>
+                    <li><strong>Complex Integration:</strong> 30+ legacy systems mean you need incremental integration with validation at each step</li>
+                    <li><strong>Regulatory Requirements:</strong> Multiple compliance frameworks require thorough documentation and validation</li>
+                    <li><strong>Stakeholder Conflicts:</strong> Multiple iterations allow stakeholders to see prototypes and negotiate trade-offs</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Sample Spiral Iteration Plan:</strong></p>
+                <p><strong>Spiral 1:</strong> Core dispatch system with basic GPS tracking. Risk focus: Can we achieve required response time? Prototype tested with small group of dispatchers.</p>
+                <p><strong>Spiral 2:</strong> Add hospital integration and patient data. Risk focus: HIPAA compliance and data security. Validate with healthcare partners.</p>
+                <p><strong>Spiral 3:</strong> Integrate criminal databases and building blueprints. Risk focus: Integration with legacy systems. Test with police and fire departments.</p>
+                <p><strong>Spiral 4:</strong> Full system integration, redundancy, and deployment. Risk focus: Failover procedures and training effectiveness.</p>
+                
+                <p style="margin-top: 15px;"><strong>Requirements Elicitation:</strong> Use observations (ride-alongs with dispatchers and emergency responders), simulated emergency scenarios (stress testing the UI), interviews during calm periods, and prototyping with iterative feedback. Avoid pure questionnaires - they won't capture the stress and complexity of real emergencies.</p>
+                
+                <p style="margin-top: 15px;"><strong>Stakeholder Conflicts:</strong> Establish a priority framework: 1) Life safety (reliability and speed), 2) Security (protect sensitive data), 3) Usability, 4) Integration breadth. Use this framework to make trade-off decisions transparently.</p>
+                
+                <p style="margin-top: 15px;"><strong>Why NOT Agile?</strong> While Agile offers flexibility, this project requires extensive upfront planning, rigorous testing, and regulatory compliance documentation. However, Agile principles (iterative development, user feedback) can be incorporated within the Spiral framework.</p>
+                
+                <p style="margin-top: 15px;"><strong>Feasibility Concerns:</strong> 12 months is extremely aggressive for this complexity. A realistic timeline would be 18-24 months. If forced to meet 12 months, recommend phased deployment: Core system in 12 months, advanced features in subsequent phases.</p>
+            </div>
+        </div>
+
+        <!-- CASE STUDY 4: E-Learning Platform -->
+        <div class="case-study moderate">
+            <div class="case-header">
+                <h2 class="case-title">Case Study 4: EduFlex - University Learning Management System</h2>
+                <span class="difficulty-badge moderate">Moderate Level</span>
+                <span class="time-badge">⏱️ 25 minutes</span>
+            </div>
+
+            <div class="scenario-box">
+                <h3>📋 The Scenario</h3>
+                <p><strong>Client:</strong> State University with 35,000 students and 2,500 faculty members</p>
+                <p><strong>Project:</strong> Replace their current Learning Management System (LMS) which is outdated and unpopular. Students complain it's clunky, professors say it's missing key features, and IT says it doesn't integrate well with other campus systems.</p>
+                <p><strong>Decision Point:</strong> Should they build a custom system or buy/customize an existing platform (like Canvas, Blackboard, or Moodle)?</p>
+            </div>
+
+            <div class="stakeholder-info">
+                <h4>👥 Key Stakeholders</h4>
+                <ul>
+                    <li><strong>Students:</strong> "Make it work like TikTok - simple and intuitive. We want mobile access and video support."</li>
+                    <li><strong>Faculty:</strong> "We need robust grading tools, plagiarism detection, and easy content creation. Also, we've spent years building content in the old system."</li>
+                    <li><strong>IT Department:</strong> "Must integrate with our student information system, email, library, and authentication system."</li>
+                    <li><strong>Administration:</strong> "We need analytics on student performance and retention. Budget is limited."</li>
+                    <li><strong>Accessibility Office:</strong> "Must be fully accessible for students with disabilities (ADA/WCAG 2.1 compliant)."</li>
+                </ul>
+            </div>
+
+            <div class="constraints-box">
+                <h4>⚠️ Constraints & Considerations</h4>
+                <ul>
+                    <li>Must be ready for Fall semester (9 months from now)</li>
+                    <li>Data migration: 10 years of courses, assignments, grades, and student work</li>
+                    <li>Faculty resistance to change: Many professors are not tech-savvy</li>
+                    <li>24/7 availability required (online students in different time zones)</li>
+                    <li>Must support 35,000 concurrent users during peak times (finals week)</li>
+                    <li>Budget: $1.5M (tight for custom development, but possible for commercial license)</li>
+                </ul>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>🤔 Discussion Questions</h3>
+                
+                <div class="question-item">
+                    <strong>Question 1: Build vs. Buy - What factors should influence this decision?</strong>
+                    Consider: Cost, timeline, customization needs, maintenance burden, vendor lock-in, and technical capabilities of IT department.
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 2: If building custom, which SDLC model fits best?</strong>
+                    Consider: Known requirements from current system pain points, but also need for user feedback to ensure adoption. Incremental? Agile? Spiral?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 3: If buying commercial software, how do requirements engineering principles still apply?</strong>
+                    Think about: Requirements gathering influences which product to buy, customization needs, integration requirements, and training plans.
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 4: How do you ensure faculty adoption?</strong>
+                    Challenge: Even the best system fails if users resist it. What strategies encourage buy-in from tech-resistant professors?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 5: What requirements elicitation techniques work best for gathering input from 35,000 students?</strong>
+                    You can't interview everyone. How do you get representative feedback efficiently?
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h4>📊 Activity: Build vs. Buy Analysis</h4>
+                <p>Complete this comparison matrix to make your recommendation:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Build Custom</th>
+                            <th>Buy Commercial (e.g., Canvas)</th>
+                            <th>Buy + Heavy Customization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Initial Cost</strong></td>
+                            <td>$1.2M (development)</td>
+                            <td>$200K/year license</td>
+                            <td>$200K/year + $400K custom</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Time to Deploy</strong></td>
+                            <td>12-18 months</td>
+                            <td>3-4 months</td>
+                            <td>6-8 months</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customization</strong></td>
+                            <td>Unlimited</td>
+                            <td>Limited</td>
+                            <td>Moderate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maintenance</strong></td>
+                            <td>Your responsibility</td>
+                            <td>Vendor handles</td>
+                            <td>Shared responsibility</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risk Level</strong></td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Future Updates</strong></td>
+                            <td>Build yourself</td>
+                            <td>Automatic from vendor</td>
+                            <td>May break customizations</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 15px;"><strong>Your Recommendation:</strong> Which option do you choose and why?</p>
+            </div>
+
+            <div class="activity-box">
+                <h4>🎓 Activity: Requirements Prioritization</h4>
+                <p>Using the MoSCoW method, categorize these requirements:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>M</strong>ust have (critical for launch)</li>
+                    <li><strong>S</strong>hould have (important but not critical)</li>
+                    <li><strong>C</strong>ould have (nice to have)</li>
+                    <li><strong>W</strong>on't have (not in scope for v1)</li>
+                </ul>
+                <p style="margin-top: 15px;">Categorize these features:</p>
+                <div style="margin-left: 20px; margin-top: 10px;">
+                    <p>___ Course creation tools for faculty</p>
+                    <p>___ Mobile app for iOS/Android</p>
+                    <p>___ Video conferencing integration (Zoom/Teams)</p>
+                    <p>___ AI-powered study recommendations</p>
+                    <p>___ Gradebook with rubric support</p>
+                    <p>___ Discussion forums</p>
+                    <p>___ Plagiarism detection integration (Turnitin)</p>
+                    <p>___ Gamification (badges, leaderboards)</p>
+                    <p>___ Virtual reality lab simulations</p>
+                    <p>___ Accessibility features (screen reader support)</p>
+                    <p>___ Integration with student information system</p>
+                    <p>___ Peer review workflows</p>
+                </div>
+            </div>
+
+            <div class="think-pair-share">
+                <h4>💭 Debate Activity (10 minutes)</h4>
+                <p><strong>Divide class into three teams:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Team Build:</strong> Argue for custom development</li>
+                    <li><strong>Team Buy:</strong> Argue for commercial software</li>
+                    <li><strong>Team Hybrid:</strong> Argue for buying with customization</li>
+                </ul>
+                <p style="margin-top: 15px;">Each team presents their case for 2 minutes, then class votes on the most convincing argument.</p>
+            </div>
+
+            <div class="notes-section">
+                <h4>📝 Your Build vs. Buy Decision</h4>
+                <textarea placeholder="Document your recommendation and justification..."></textarea>
+            </div>
+
+            <button class="reveal-btn" onclick="toggleReveal('answer4')">💡 Show Instructor Discussion Points</button>
+            <div class="answer-reveal" id="answer4">
+                <h4>🎯 Discussion Points for Instructors</h4>
+                <p><strong>Most Realistic Recommendation: Buy Commercial Software</strong></p>
+                <p><strong>Rationale:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Timeline:</strong> 9 months is insufficient for custom development of a robust LMS</li>
+                    <li><strong>Budget:</strong> $1.5M is barely enough for development, let alone ongoing maintenance</li>
+                    <li><strong>Proven Solution:</strong> Commercial platforms have been refined over years with thousands of schools' feedback</li>
+                    <li><strong>Maintenance:</strong> Universities typically lack the resources to maintain complex custom systems</li>
+                    <li><strong>Updates & Security:</strong> Vendors handle security patches and feature updates</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>When Custom Makes Sense:</strong> Only if the university has unique pedagogical requirements that no commercial system supports AND has a strong, dedicated development team AND has a longer timeline (18+ months).</p>
+                
+                <p style="margin-top: 15px;"><strong>Requirements Engineering Still Critical:</strong> Even when buying, you must:</p>
+                <ul style="margin-left: 20px; margin-top: 5px;">
+                    <li>Gather requirements to evaluate which product best fits needs</li>
+                    <li>Identify integration requirements with existing systems</li>
+                    <li>Determine customization needs and priority</li>
+                    <li>Plan data migration requirements</li>
+                    <li>Define training and support requirements</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>If Building Custom - Use Incremental Model:</strong> Deploy core features (course creation, gradebooks, assignments) in Phase 1, then add advanced features (video integration, analytics) in Phase 2+. This allows faster time-to-market while incorporating user feedback.</p>
+                
+                <p style="margin-top: 15px;"><strong>Requirements Elicitation:</strong> Questionnaires for students (large population), focused interviews with representative faculty from different disciplines, usability testing with prototypes, and review of pain points from current system's help desk tickets.</p>
+                
+                <p style="margin-top: 15px;"><strong>Faculty Adoption Strategies:</strong> Early faculty advisory group, pilot program with early adopters, comprehensive training program, dedicated support during transition, and migration of existing content (don't force them to rebuild from scratch).</p>
+            </div>
+        </div>
+
+        <!-- CASE STUDY 5: IoT Smart Home System -->
+        <div class="case-study difficult">
+            <div class="case-header">
+                <h2 class="case-title">Case Study 5: HomeMind - AI-Powered Smart Home Ecosystem</h2>
+                <span class="difficulty-badge hard">Advanced Level</span>
+                <span class="time-badge">⏱️ 25 minutes</span>
+            </div>
+
+            <div class="scenario-box">
+                <h3>📋 The Scenario</h3>
+                <p><strong>Client:</strong> HomeMind Technologies, a mid-sized company entering the competitive smart home market</p>
+                <p><strong>Project:</strong> Develop an integrated smart home system with AI capabilities that learns user behavior and automates home functions (lighting, temperature, security, entertainment). Must compete with established players like Google Home, Amazon Alexa, and Apple HomeKit.</p>
+                <p><strong>Complexity Factors:</strong> Hardware + software integration, real-time processing, AI/ML components, privacy concerns, and interoperability with hundreds of third-party devices.</p>
+            </div>
+
+            <div class="stakeholder-info">
+                <h4>👥 Key Stakeholders</h4>
+                <ul>
+                    <li><strong>Product Manager:</strong> "Our differentiator is AI that truly learns. Not just simple automation rules - actual machine learning that predicts what users want."</li>
+                    <li><strong>Hardware Engineer:</strong> "We're designing custom sensors and a central hub. Firmware and software must be in perfect sync."</li>
+                    <li><strong>Security Expert:</strong> "We're entering people's homes - privacy and security are non-negotiable. One data breach destroys the company."</li>
+                    <li><strong>UX Designer:</strong> "Setup must be grandma-friendly. If installation requires an IT degree, we lose 80% of our market."</li>
+                    <li><strong>Marketing:</strong> "We need to launch at CES (Consumer Electronics Show) in 10 months to make a splash and secure retail partnerships."</li>
+                </ul>
+            </div>
+
+            <div class="constraints-box">
+                <h4>⚠️ Project Challenges</h4>
+                <ul>
+                    <li><strong>Hardware-Software Dependency:</strong> Can't fully test software until hardware prototypes exist</li>
+                    <li><strong>AI Uncertainty:</strong> Machine learning behavior is somewhat unpredictable - how do you test it?</li>
+                    <li><strong>Ecosystem Integration:</strong> Must work with 100+ different smart bulbs, thermostats, cameras, etc.</li>
+                    <li><strong>Real-time Requirements:</strong> Security features must respond instantly to threats</li>
+                    <li><strong>Regulatory Compliance:</strong> FCC (radio frequency), UL (electrical safety), privacy laws (GDPR, CCPA)</li>
+                    <li><strong>Firmware Updates:</strong> Must support over-the-air updates for thousands of deployed devices</li>
+                </ul>
+            </div>
+
+            <div class="discussion-questions">
+                <h3>🤔 Multi-Layered Discussion Questions</h3>
+                
+                <div class="question-item">
+                    <strong>Question 1: This is a hardware-software co-development project. How does this change your SDLC approach?</strong>
+                    Consider: Hardware has longer development cycles and is expensive to change. Software is more flexible. How do you synchronize these different timelines? Can you use different SDLC models for hardware vs. software?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 2: AI/ML introduces uncertainty. How do you handle requirements for a system that "learns"?</strong>
+                    Challenge: You can't fully specify the behavior of a machine learning system upfront. It evolves with data. How do you write requirements for this? How do you test it?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 3: This project involves THREE major components with different characteristics. How do you manage them?</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Component A - Hardware (hub, sensors):</strong> Long dev cycle, expensive to change, physical prototyping needed</li>
+                        <li><strong>Component B - Core Software (device communication, automation logic):</strong> Critical reliability, must be stable</li>
+                        <li><strong>Component C - AI/ML (behavior learning):</strong> Experimental, will evolve based on user data</li>
+                    </ul>
+                    <p>Should you use the same SDLC model for all three? Or different models for each component?</p>
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 4: How do you handle requirements gathering for a product that will compete with market leaders?</strong>
+                    Your competitors (Amazon, Google) set user expectations. Do you copy their features? Innovate? How do you elicit requirements when users have preconceived notions from competitor products?
+                </div>
+
+                <div class="question-item">
+                    <strong>Question 5: Security and privacy requirements are critical. How do you ensure they're not an afterthought?</strong>
+                    Many IoT products have been hacked. How do you build security into every phase rather than adding it at the end?
+                </div>
+            </div>
+
+            <div class="bonus-challenge">
+                <h4>🔥 Advanced Challenge: Design a Hybrid SDLC Approach</h4>
+                <p>This project is too complex for a single SDLC model. Design a hybrid approach that uses DIFFERENT models for different components:</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Recommended SDLC Model</th>
+                            <th>Justification</th>
+                            <th>Key Milestones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hardware</strong><br>(Hub, sensors)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Core Platform</strong><br>(Networking, security)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI/ML System</strong><br>(Behavior learning)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mobile App</strong><br>(User interface)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="activity-box">
+                <h4>🧪 Activity: Testing Strategy for AI Components</h4>
+                <p>Traditional testing (input X → expect output Y) doesn't work well for machine learning. Design a testing approach:</p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>How do you test a system that learns user behavior?</strong> (It behaves differently for different users)</li>
+                    <li><strong>What happens if the AI makes a wrong prediction?</strong> (User wanted lights on, AI turned them off)</li>
+                    <li><strong>How do you test edge cases?</strong> (Unusual user behaviors the AI hasn't seen before)</li>
+                    <li><strong>How do you validate security?</strong> (AI shouldn't learn to unlock doors for strangers)</li>
+                </ol>
+                <p style="margin-top: 15px;">Propose testing techniques that go beyond traditional unit/integration testing.</p>
+            </div>
+
+            <div class="activity-box">
+                <h4>🎯 Activity: Incremental Deployment Strategy</h4>
+                <p>You can't deploy everything at once. Design a phased rollout:</p>
+                <p><strong>Phase 1 (MVP - Month 6):</strong></p>
+                <p style="margin-left: 20px;">What's the minimum viable product that proves value? What features absolutely must be in v1.0?</p>
+                
+                <p style="margin-top: 15px;"><strong>Phase 2 (Month 9 - CES Launch):</strong></p>
+                <p style="margin-left: 20px;">What additional features for the big reveal? How do you balance impressive demos with stability?</p>
+                
+                <p style="margin-top: 15px;"><strong>Phase 3 (Post-Launch):</strong></p>
+                <p style="margin-left: 20px;">What features get added based on early user feedback? How does the AI improve with real-world data?</p>
+            </div>
+
+            <div class="reflection-box">
+                <h4>🤔 Deep Reflection: When Textbook Models Don't Fit Reality</h4>
+                <p>Real-world projects often don't fit neatly into textbook SDLC categories. Reflect on:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Why might a company need to invent a custom/hybrid SDLC approach?</li>
+                    <li>What are the risks of deviating from established models?</li>
+                    <li>How do you convince stakeholders to accept a complex hybrid approach?</li>
+                    <li>What happens when different teams (hardware, software, AI) want to use different methodologies?</li>
+                </ul>
+                <textarea style="margin-top: 15px;" placeholder="Write your reflection here..."></textarea>
+            </div>
+
+            <div class="notes-section">
+                <h4>📝 Your Hybrid SDLC Strategy</h4>
+                <textarea placeholder="Detail your approach for managing this complex multi-component project..."></textarea>
+            </div>
+
+            <button class="reveal-btn" onclick="toggleReveal('answer5')">💡 Show Instructor Discussion Points</button>
+            <div class="answer-reveal" id="answer5">
+                <h4>🎯 Discussion Points for Instructors</h4>
+                <p><strong>Recommended Approach: Hybrid Model with Component-Specific Strategies</strong></p>
+                
+                <p style="margin-top: 15px;"><strong>Hardware Component:</strong> Use V-Model or Waterfall</p>
+                <ul style="margin-left: 20px;">
+                    <li>Hardware changes are expensive; extensive upfront design is essential</li>
+                    <li>V-Model ensures each design phase has corresponding testing/validation</li>
+                    <li>Physical prototyping happens in stages (breadboard → PCB prototype → final design)</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Core Platform:</strong> Use Incremental Model with Spiral Elements</p>
+                <ul style="margin-left: 20px;">
+                    <li>Build critical features (networking, security) first with rigorous testing</li>
+                    <li>Spiral approach for high-risk components (encryption, device communication)</li>
+                    <li>Incremental releases allow testing with hardware prototypes as they become available</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>AI/ML Component:</strong> Use Prototyping + Agile</p>
+                <ul style="margin-left: 20px;">
+                    <li>ML models require experimentation - build, test, iterate rapidly</li>
+                    <li>Start with simulated data, then real user data in beta testing</li>
+                    <li>Continuous refinement post-launch as system learns</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Mobile App:</strong> Use Agile (Scrum)</p>
+                <ul style="margin-left: 20px;">
+                    <li>User interface will evolve based on usability testing</li>
+                    <li>2-week sprints allow rapid iteration on UX</li>
+                    <li>Can be developed somewhat independently from hardware</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Integration Strategy:</strong> Establish "integration milestones" where all components come together for system testing. Use continuous integration tools to catch compatibility issues early.</p>
+                
+                <p style="margin-top: 15px;"><strong>AI Testing Approach:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Unit Tests:</strong> Test individual ML model components</li>
+                    <li><strong>Behavioral Tests:</strong> Define expected behavior patterns (e.g., "should learn user's wake-up time within 2 weeks")</li>
+                    <li><strong>A/B Testing:</strong> Deploy different models to different user groups, compare performance</li>
+                    <li><strong>Safety Tests:</strong> Ensure AI can't learn dangerous behaviors (e.g., ignoring security alerts)</li>
+                    <li><strong>Beta Program:</strong> Extensive real-world testing with volunteer users before general release</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Security-First Approach:</strong> Use threat modeling (STRIDE framework) in the design phase, security code reviews at each sprint, penetration testing before each release, and automatic security updates post-launch.</p>
+                
+                <p style="margin-top: 15px;"><strong>Requirements Elicitation:</strong> Competitor analysis (understand baseline expectations), user studies with current smart home owners, usability labs with prototypes, beta tester feedback programs, and privacy focus groups (understand comfort levels with data collection).</p>
+                
+                <p style="margin-top: 15px;"><strong>Key Takeaway:</strong> Complex projects may require custom SDLC approaches that blend multiple methodologies. The key is being intentional about which model you use for each component and how they integrate together.</p>
+            </div>
+        </div>
+
+        <!-- FINAL SYNTHESIS ACTIVITY -->
+        <div class="case-study" style="border-left: 8px solid #f39c12;">
+            <div class="case-header">
+                <h2 class="case-title">🎓 Final Synthesis: Your Own Project Proposal</h2>
+                <span class="difficulty-badge moderate">Capstone Activity</span>
+                <span class="time-badge">⏱️ 20 minutes</span>
+            </div>
+
+            <div class="scenario-box">
+                <h3>🚀 Create Your Own Case Study</h3>
+                <p>Now it's your turn! Design a software project scenario and analyze it using everything you've learned.</p>
+            </div>
+
+            <div class="activity-box">
+                <h4>📝 Your Project Proposal Template</h4>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>1. Project Description:</strong>
+                    <p style="margin-top: 8px;">What are you building? Who is it for? What problem does it solve?</p>
+                    <textarea style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;"></textarea>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>2. Stakeholders & Their Priorities:</strong>
+                    <p style="margin-top: 8px;">Who cares about this project? What does each stakeholder want?</p>
+                    <textarea style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;"></textarea>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>3. Constraints:</strong>
+                    <p style="margin-top: 8px;">What are your limitations? (Budget, timeline, technical constraints, regulations)</p>
+                    <textarea style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;"></textarea>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>4. SDLC Model Selection:</strong>
+                    <p style="margin-top: 8px;">Which SDLC model(s) would you use and why? Justify your choice based on project characteristics.</p>
+                    <textarea style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;"></textarea>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>5. Requirements Elicitation Strategy:</strong>
+                    <p style="margin-top: 8px;">How will you gather requirements? Which techniques are best suited for your stakeholders?</p>
+                    <textarea style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;"></textarea>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>6. Top 3 Risks & Mitigation:</strong>
+                    <p style="margin-top: 8px;">What could go wrong? How will you address these risks?</p>
+                    <textarea style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;"></textarea>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>7. Feasibility Analysis:</strong>
+                    <p style="margin-top: 8px;">Assess Technical, Economic, and Operational feasibility. Is this project realistic?</p>
+                    <textarea style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-family: inherit;"></textarea>
+                </div>
+            </div>
+
+            <div class="group-activity">
+                <h4>👥 Presentation Activity (If Time Permits)</h4>
+                <p>Present your project proposal to the class (3 minutes each). Classmates will ask questions and challenge your SDLC model choice.</p>
+                <p style="margin-top: 10px;"><strong>Audience Task:</strong> For each presentation, identify one strength and one area for improvement in their SDLC approach.</p>
+            </div>
+        </div>
+
+        <!-- REFLECTION & WRAP-UP -->
+        <div class="section" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border: none;">
+            <h2 style="color: #434190;">🎯 Session Wrap-Up: Key Takeaways</h2>
+            
+            <div class="reflection-box">
+                <h4>What Did We Learn Today?</h4>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>No "One Size Fits All":</strong> Different projects need different SDLC models based on their unique characteristics</li>
+                    <li><strong>Requirements Drive Everything:</strong> Poor requirements gathering leads to project failure, regardless of which SDLC model you use</li>
+                    <li><strong>Stakeholder Management is Critical:</strong> Technical skills alone aren't enough - you must navigate conflicting priorities</li>
+                    <li><strong>Risk Assessment is Essential:</strong> High-risk projects need more rigorous approaches (Spiral, V-Model)</li>
+                    <li><strong>Flexibility vs. Structure Trade-off:</strong> Agile offers flexibility but isn't appropriate for all scenarios</li>
+                    <li><strong>Real World is Messy:</strong> Hybrid approaches are often necessary for complex projects</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip" style="margin-top: 20px;">
+                <strong>💡 Final Thought:</strong> The best software engineers aren't just good coders - they understand how to choose and adapt processes to fit the project context. SDLC models are tools, not rules. Your job is to use them wisely.
+            </div>
+
+            <div style="background: white; padding: 25px; border-radius: 10px; margin-top: 20px;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📚 Additional Challenge Questions for Discussion</h3>
+                <ol style="margin-left: 20px; line-height: 2;">
+                    <li>Can you think of a project where NO SDLC model seems appropriate? What would you do?</li>
+                    <li>How has the rise of AI/ML development challenged traditional SDLC models?</li>
+                    <li>In your opinion, why do so many software projects still fail despite having SDLC frameworks?</li>
+                    <li>Should ethics and sustainability be considered as requirements in every project? Why or why not?</li>
+                    <li>How might SDLC practices evolve in the next 10 years as technology changes?</li>
+                </ol>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <h3 style="color: #667eea;">Thank you for your engagement today! 🎉</h3>
+                <p style="margin-top: 10px; font-size: 1.1em; color: #555;">Continue applying these principles in your future projects!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Toggle answer reveal
+        function toggleReveal(id) {
+            const answerDiv = document.getElementById(id);
+            answerDiv.classList.toggle('shown');
+            event.target.textContent = answerDiv.classList.contains('shown') 
+                ? '🔼 Hide Discussion Points' 
+                : '💡 Show Instructor Discussion Points';
+        }
+
+        // Toggle matrix card selection
+        function toggleSelection(element) {
+            element.classList.toggle('selected');
+        }
+
+        // Feature categorization system for Case Study 2
+        let featureStates = {}; // Track state: 0 = available, 1 = must-have, 2 = later
+
+        function moveFeature(element, initialTarget) {
+            const featureId = element.getAttribute('data-feature');
+            
+            // Initialize state if not exists
+            if (!featureStates[featureId]) {
+                featureStates[featureId] = 0;
+            }
+            
+            // Get current state and advance to next
+            let currentState = featureStates[featureId];
+            let nextState = (currentState + 1) % 3;
+            featureStates[featureId] = nextState;
+            
+            // Remove from all zones first
+            element.classList.remove('in-must-have', 'in-later');
+            
+            // Get references to drop zones
+            const mustHaveZone = document.getElementById('must-have');
+            const laterZone = document.getElementById('later-versions');
+            const availableZone = document.getElementById('available-features');
+            
+            // Remove placeholder text if exists
+            const mustHavePlaceholder = mustHaveZone.querySelector('p');
+            const laterPlaceholder = laterZone.querySelector('p');
+            if (mustHavePlaceholder) mustHavePlaceholder.style.display = 'none';
+            if (laterPlaceholder) laterPlaceholder.style.display = 'none';
+            
+            // Move to appropriate zone based on state
+            if (nextState === 1) {
+                // Move to Must Have
+                element.classList.add('in-must-have');
+                mustHaveZone.appendChild(element);
+            } else if (nextState === 2) {
+                // Move to Later Versions
+                element.classList.add('in-later');
+                laterZone.appendChild(element);
+            } else {
+                // Move back to Available
+                availableZone.appendChild(element);
+            }
+            
+            // Show placeholder if zone is empty
+            if (mustHaveZone.children.length === 1 && mustHavePlaceholder) {
+                mustHavePlaceholder.style.display = 'block';
+            }
+            if (laterZone.children.length === 1 && laterPlaceholder) {
+                laterPlaceholder.style.display = 'block';
+            }
+        }
+
+        // Track progress through case studies
+        let completedCases = 0;
+        const totalCases = 6;
+
+        function updateProgress() {
+            completedCases++;
+            const percentage = Math.round((completedCases / totalCases) * 100);
+            const progressBar = document.getElementById('progress');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '% Complete';
+        }
+
+        // Auto-save notes to localStorage
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach((textarea, index) => {
+            // Load saved content
+            const saved = localStorage.getItem(`case-study-note-${index}`);
+            if (saved) {
+                textarea.value = saved;
+            }
+
+            // Save on change
+            textarea.addEventListener('input', function() {
+                localStorage.setItem(`case-study-note-${index}`, this.value);
+            });
+        });
+
+        // Add scroll-based progress tracking
+        window.addEventListener('scroll', function() {
+            const caseStudies = document.querySelectorAll('.case-study');
+            caseStudies.forEach(cs => {
+                const rect = cs.getBoundingClientRect();
+                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                    cs.style.opacity = '1';
+                }
+            });
+        });
+
+        // Print/Export functionality
+        function exportNotes() {
+            const notes = [];
+            textareas.forEach((textarea, index) => {
+                if (textarea.value) {
+                    notes.push(`Note ${index + 1}:\n${textarea.value}\n\n`);
+                }
+            });
+            
+            const blob = new Blob([notes.join('\n---\n\n')], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sdlc-case-study-notes.txt';
+            a.click();
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + S to save notes
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                alert('Notes auto-saved! ✓');
+            }
+        });
+
+        console.log('SDLC Case Studies Interactive Page Loaded! 🚀');
+        console.log('Your notes are automatically saved as you type.');
+    </script>
+</body>
+</html>
